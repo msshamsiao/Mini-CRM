@@ -2,9 +2,9 @@
 
 return [
 
-    'main_navigation'               => 'ГЛАВНОЕ МЕНЮ',
+    'main_navigation'               => '',
     'blog'                          => 'Блог',
-    'pages'                         => 'Страницы',
+    'pages'                         => 'employees.index',
     'account_settings'              => 'НАСТРОЙКИ ПРОФИЛЯ',
     'profile'                       => 'Профиль',
     'change_password'               => 'Изменить пароль',

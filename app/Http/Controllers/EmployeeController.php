@@ -34,7 +34,25 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'firstname' => 'required',
+            'lastname'  => 'required',
+            'company'   => 'required',
+            'email'     => 'required',
+            'phone'     => 'required'
+        ]);
+
+        $employees = new Employee;
+        $employees->firstname = $request->firstname;
+        $employees->lastname  = $request->lastname;
+        $employees->company   = $request->company;
+        $employees->email     = $request->email;
+        $employees->phone     = $request->phone;
+        $employees->save();
+
+        Session::flash('success', 'You succesfully added');
+        return back();
+
     }
 
     /**
@@ -56,7 +74,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -68,7 +86,12 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employees = Employee::find($id);
+        $employees->firstname = $request->firstname;
+        $employees->save();
+
+        Session::flash('success', "You successfully updated");
+        return redirect()->route('employees.index');
     }
 
     /**

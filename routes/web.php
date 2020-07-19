@@ -24,7 +24,7 @@ Route::get('/home', [
     'as'   => 'home'
 ]);
 
-Route::get('/employees/index', [
+Route::get('/employees.index', [
     'uses' => 'EmployeeController@index',
     'as'   => 'employees.index'
 ]);
