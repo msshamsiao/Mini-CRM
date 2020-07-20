@@ -251,9 +251,9 @@ return [
 
         [
             'text'        => 'Company Page',
-            'url'         => 'company.index',
+            'url'         => 'companies.index',
             'icon'        => 'far fa-fw fa-file',
-            // 'label'       => 4,
+            'label'       => 4,
             'label_color' => 'success',
         ],
 

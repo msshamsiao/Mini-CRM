@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends Model
 {
-
-    protected $date = ['deleted_at'];
+    use SoftDeletes;
+    
+    protected $dates = ['deleted_at'];
     
     protected $table = "table_employees";
 
@@ -19,7 +21,7 @@ class Employee extends Model
         'phone'
     ];
 
-    public function employee(){
-        return $this->hasMany('App\Employee', 'company', 'id');
+    public function companies(){
+        return $this->belongsTo('App\Company', 'company');
     }
 }

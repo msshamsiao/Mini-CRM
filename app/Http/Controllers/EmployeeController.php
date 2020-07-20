@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+use App\Employee;
+use App\Company;
+use Validator;
 
 class EmployeeController extends Controller
 {
@@ -13,7 +19,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('employees.index');
+        return view('employees.index')
+        ->with('companies', Company::select('id','name')->get())
+        ->with('employees', Employee::all());
     }
 
     /**
@@ -34,13 +42,27 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        // $this->validate($request, [
+        //     'firstname' => 'required',
+        //     'lastname'  => 'required',
+        //     'company'   => 'required',
+        //     'email'     => 'required',
+        //     'phone'     => 'required'
+        // ]);
+
+        $validator = Validator::make($request->all(), [
             'firstname' => 'required',
             'lastname'  => 'required',
             'company'   => 'required',
             'email'     => 'required',
             'phone'     => 'required'
         ]);
+
+        if($validator->fails()){
+            $error = $validator->errors()->first();
+            toastr()->error('warning', 'Please enter valid details');
+            return back();
+        }
 
         $employees = new Employee;
         $employees->firstname = $request->firstname;
@@ -49,8 +71,8 @@ class EmployeeController extends Controller
         $employees->email     = $request->email;
         $employees->phone     = $request->phone;
         $employees->save();
-
-        Session::flash('success', 'You succesfully added');
+        
+        toastr()->success('success', 'You succesfully added');
         return back();
 
     }
@@ -90,7 +112,7 @@ class EmployeeController extends Controller
         $employees->firstname = $request->firstname;
         $employees->save();
 
-        Session::flash('success', "You successfully updated");
+        toastr()->success('success', 'You succesfully updated');
         return redirect()->route('employees.index');
     }
 
@@ -102,6 +124,14 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employees = Employee::find($id);
+
+        if($employees->delete()){ 
+			toastr()->success('success', 'You succesfully deleted');
+		}else{
+			toastr()->error('message_success', 'Sorry please try again');
+		}
+
+        return redirect()->route('employees.index');
     }
 }
