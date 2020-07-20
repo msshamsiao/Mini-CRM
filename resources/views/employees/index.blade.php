@@ -1,6 +1,9 @@
 @extends('adminlte::page')
 @extends('layouts.sweetalert')
+
 @section('title', 'Employee Page')
+
+@section('plugins.Datatables', true)
 
 @section('content_header')
     <h5>Employee's Information</h5>
@@ -95,7 +98,7 @@
                             </div>
                         </div>
                             
-                            <table id="example" class="table table-striped table-bordered zero-configuration">
+                            <table id="employee" class="table table-striped table-bordered zero-configuration">
                                 <thead>
                                     <tr>
                                         <th>Actions</th>
@@ -210,27 +213,9 @@
 @endsection
 
 @section('script')
-    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
-    <script src="{{asset('dataTables/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/jszip.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/pdfmake.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/vfs_fonts.js')}}"></script>
-    <script src="{{asset('dataTables/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/buttons.print.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/buttons.colVis.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/responsive.bootstrap4.min.js')}}"></script>
-
     <script  type="text/javascript">
     $(document).ready(function(){
-        var table = $('#example').DataTable({
+        var table = $('#employee').DataTable({
             lengthChange: false,
         });
 

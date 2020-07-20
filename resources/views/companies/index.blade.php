@@ -3,15 +3,10 @@
 
 @section('title', 'Company Page')
 
+
 @section('content_header')
     <h5>Compay's Information</h5>
-@endsection
-
-@section('css')
-    <link href="{{asset('dataTables/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-    <link href="{{asset('dataTables/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
-    <link href="{{asset('dataTables/css/responsive.bootstrap4.min.css')}}" rel="stylesheet">
-@endsection
+@stop
 
 @section('content')
 @include('sweetalert::alert')
@@ -38,7 +33,7 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                                         </div>
 
-                                        <div class="modal-body" style="height:450px; width:380px;">
+                                        <div class="modal-body" style="height:500px; width:380px;">
                                             <form class="form-validate" action="{{route('companies.store')}}" method="post" enctype="multipart/form-data">
                                             {{csrf_field()}}
                                                 <div class="form-group row">
@@ -91,7 +86,7 @@
                                 </div>
                             </div>
 
-                            <table id="company" class="table table-striped table-bordered zero-configurations">
+                            <table id="company" class="display" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Actions</th>
@@ -138,7 +133,7 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                 </div>
                                                 <div class="modal-body" style="height:450px; width:400px;">
-                                                    <form class="form-validate" action="" method="post" id="updateForm">
+                                                    <form action="" method="post" id="updateForm">
                                                     @method('put')
                                                     @csrf 
                                                     
@@ -195,36 +190,15 @@
         </div>
     </div>
 
-@endsection
+@stop
 
 @section('script')
-    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
-    <script src="{{asset('dataTables/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/jszip.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/pdfmake.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/vfs_fonts.js')}}"></script>
-    <script src="{{asset('dataTables/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/buttons.print.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/buttons.colVis.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{asset('dataTables/js/responsive.bootstrap4.min.js')}}"></script>
-
+   
+  
     <script  type="text/javascript">
-    $(document).ready(function(){
-        var table = $('#company').DataTable({
-            lengthChange: false,
+        $(document).ready(function() {
+            $('#company').DataTable();
         });
-
-        table.buttons().container()
-            .appendTo('#example_wrapper .col-md-6:eq(0)');
-    });
 
     function editFunction(name,email,logo,website,id)
     {
@@ -236,4 +210,4 @@
         document.getElementById('updateForm').action = "companies.update/"+id;
     }
     </script>
-@endsection
+@stop
